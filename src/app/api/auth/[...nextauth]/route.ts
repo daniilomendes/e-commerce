@@ -1,7 +1,5 @@
-import { authOptions } from "@/lib/auth";
 import NextAuth from "next-auth";
-
-// const prisma = new PrismaClient()
+import { authOptions } from "@/lib/auth";
 
 const handler = NextAuth(authOptions);
 
