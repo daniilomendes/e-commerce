@@ -40,9 +40,9 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     JSON.parse(localStorage.getItem("@ecd-store/cart-products") || "[]")
   );
 
-  useEffect(() => {
-    localStorage.setItem("@ecd-store/cart-products", JSON.stringify(products))
-  }, [products])
+  // useEffect(() => {
+  //   localStorage.setItem("@ecd-store/cart-products", JSON.stringify(products))
+  // }, [products])
 
   const subtotal = useMemo(() => {
     return products.reduce((acc, product) => {
