@@ -5,13 +5,15 @@ import { PackageSearchIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import OrderItem from "./components/order-item";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 const OrderPage = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
-    return <p className="flex flex-col items-center gap-5 mt-5">Acesso Negado!</p>;
+    return (
+      <p className="mt-5 flex flex-col items-center gap-5">Acesso Negado!</p>
+    );
   }
 
   const orders = await prismaCliente.order.findMany({
@@ -21,23 +23,20 @@ const OrderPage = async () => {
     include: {
       orderProducts: {
         include: {
-            product: true
-        }
+          product: true,
+        },
       },
     },
   });
 
   return (
     <div className="p-5">
-      <Badge
-        className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
-        variant="outline"
-      >
+      <Badge variant="heading">
         <PackageSearchIcon size={16} />
         Meus Pedidos
       </Badge>
 
-      <div className="flex flex-col gap-5 mt-5">
+      <div className="mt-5 flex flex-col gap-5">
         {orders.map((order) => (
           <OrderItem key={order.id} order={order} />
         ))}
