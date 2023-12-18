@@ -69,10 +69,12 @@ export default async function Home() {
           <ProductList products={keyboards} />
         </div>
 
-        <PromoBanner
-          src="/banner-home-03.png"
-          alt="até 55% de desconto em mouses!"
-        />
+        <div>
+          <PromoBanner
+            src="/banner-home-03.png"
+            alt="até 55% de desconto em mouses!"
+          />
+        </div>
 
         <div className="flex flex-col gap-3 lg:gap-5">
           <SectionTitle className="pl-5">Mouses</SectionTitle>

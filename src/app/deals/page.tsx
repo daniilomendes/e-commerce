@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import ProductItem from "@/components/ui/product-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { prismaCliente } from "@/lib/prisma";
-import { PercentIcon, ShoppingCartIcon } from "lucide-react";
+import { PercentIcon } from "lucide-react";
 
 const DealsPage = async () => {
   const deals = await prismaCliente.product.findMany({
@@ -24,7 +24,10 @@ const DealsPage = async () => {
         {deals.map((product) => (
           <ProductItem
             key={product.id}
-            product={computeProductTotalPrice(product)}
+            product={{
+              ...product,
+              totalPrice: computeProductTotalPrice(product)
+            }}
           />
         ))}
       </div>
