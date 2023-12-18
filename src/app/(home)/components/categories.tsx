@@ -3,13 +3,14 @@ import CategoryItem from "./category-item";
 
 const Categories = async () => {
   const categories = await prismaCliente.category.findMany({});
-  return( 
-  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-    {categories.map((category) => (
+  
+  return (
+    <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+      {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
-    ))}
-  </div>
-)
+      ))}
+    </div>
+  );
 };
 
 export default Categories;
