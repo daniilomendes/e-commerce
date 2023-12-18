@@ -38,12 +38,12 @@ const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
         <div className="flex items-center w-full justify-between gap-1">
           <div className="flex items-center gap-1">
             <p className="text-sm font-bold">
-              R$ {productWithTotalPrice.totalPrice.toFixed(2)}
+            R$ {productWithTotalPrice.toFixed(2)}
             </p>
 
-            {productWithTotalPrice.discountPercentage > 0 && (
+            {orderProduct.discountPercentage > 0 && (
               <p className="text-xs line-through opacity-60">
-                R$ {Number(productWithTotalPrice.basePrice).toFixed(2)}
+                 R$ {Number(orderProduct.basePrice).toFixed(2)}
               </p>
             )}
           </div>

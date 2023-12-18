@@ -36,8 +36,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
 
   const total = useMemo(() => {
     return order.orderProducts.reduce((acc, product) => {
-      const productWithTotalPrice = computeProductTotalPrice(product.product);
-      return acc + productWithTotalPrice.totalPrice * product.quantity;
+      const productTotalPrice = computeProductTotalPrice(product.product);
+
+      return acc + productTotalPrice * product.quantity;
     }, 0);
   }, [order.orderProducts]);
 
@@ -45,11 +46,16 @@ const OrderItem = ({ order }: OrderItemProps) => {
 
   return (
     <Card className="px-5">
-      <Accordion type="single" className="w-full" collapsible defaultValue={order.id}>
+      <Accordion
+        type="single"
+        className="w-full"
+        collapsible
+        defaultValue={order.id}
+      >
         <AccordionItem value={order.id}>
           <AccordionTrigger>
             <div className="flex flex-col gap-1 text-left">
-              <p className="font-bold uppercase text-sm">
+              <p className="text-sm font-bold uppercase">
                 Pedido com {order.orderProducts.length} produto(s)
               </p>
               <span className="text-xs opacity-60">
