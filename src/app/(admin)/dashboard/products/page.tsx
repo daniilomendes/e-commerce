@@ -2,13 +2,21 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { prismaCliente } from "@/lib/prisma";
 import { PackageIcon, PlusIcon } from "lucide-react";
-import ProductsTable from "./components/products-table";
+import ProductsTable, { ProductWithTotalPriceAndCategory } from "./components/products-table";
 import { computeProductTotalPrice } from "@/helpers/product";
 
 const ProductsPage = async () => {
-  const products = await prismaCliente.product.findMany();
+  const products = await prismaCliente.product.findMany({
+    include: {
+      category: {
+        select: {
+          name: true
+        }
+      }
+    }
+  });
 
-  const productsWithTotalPrice = products.map((product) => ({
+  const productsWithTotalPrice:ProductWithTotalPriceAndCategory[] = products.map((product) => ({
     ...product,
     totalPrice: computeProductTotalPrice(product),
   }));
