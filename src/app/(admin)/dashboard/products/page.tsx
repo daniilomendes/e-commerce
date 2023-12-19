@@ -2,7 +2,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { prismaCliente } from "@/lib/prisma";
 import { PackageIcon, PlusIcon } from "lucide-react";
-import ProductsTable, { ProductWithTotalPriceAndCategory } from "./components/products-table";
+import ProductsTable, {
+  ProductWithTotalPriceAndCategory,
+} from "./components/products-table";
 import { computeProductTotalPrice } from "@/helpers/product";
 
 const ProductsPage = async () => {
@@ -10,16 +12,17 @@ const ProductsPage = async () => {
     include: {
       category: {
         select: {
-          name: true
-        }
-      }
-    }
+          name: true,
+        },
+      },
+    },
   });
 
-  const productsWithTotalPrice:ProductWithTotalPriceAndCategory[] = products.map((product) => ({
-    ...product,
-    totalPrice: computeProductTotalPrice(product),
-  }));
+  const productsWithTotalPrice: ProductWithTotalPriceAndCategory[] =
+    products.map((product) => ({
+      ...product,
+      totalPrice: computeProductTotalPrice(product),
+    }));
 
   return (
     <div className="flex w-full flex-col gap-10 p-10">
